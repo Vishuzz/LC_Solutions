@@ -1,5 +1,5 @@
 class Solution {
-    final String[] map = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    String[] map = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
     void backtrack(int index,String digits,String curr,List<String> ans){
         if(index == digits.length()){
             ans.add(curr);
