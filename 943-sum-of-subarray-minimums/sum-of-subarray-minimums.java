@@ -8,7 +8,7 @@ class Solution {
 
         Stack<Integer> stack = new Stack<>();
 
-        // Find previous smaller or equal
+        // Find previous smaller
         for (int i = 0; i < n; i++) {
 
             while (!stack.isEmpty() && arr[stack.peek()] > arr[i]) {
