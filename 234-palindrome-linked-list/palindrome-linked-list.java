@@ -10,27 +10,36 @@
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        LinkedList<Integer> list1 = new LinkedList<>();
-        LinkedList<Integer> list2 = new LinkedList<>();
-        ListNode curr = head;
-        while(curr != null){
-            list1.add(curr.val);
-            curr = curr.next;
+        if(head == null || head.next == null){
+            return true;
         }
-        //Now reverse the linked list
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode secondhalf = reverseList(slow.next);
+        ListNode first = head;
+        ListNode second = secondhalf;
+        while(second != null){
+            if(first.val != second.val){
+                return false;
+            }
+            first = first.next;
+            second = second.next;
+        }
+        return true;
+    }
+    public ListNode reverseList(ListNode head){
         ListNode prev = null;
-        curr = head;
+        ListNode curr = head;
         while(curr != null){
             ListNode temp = curr.next;
             curr.next = prev;
             prev = curr;
             curr = temp;
         }
-        curr = prev;
-        while(curr != null){
-            list2.add(curr.val);
-            curr = curr.next;
-        }
-        return list1.equals(list2);
+        return prev;
     }
 }
