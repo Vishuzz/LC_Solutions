@@ -17,30 +17,24 @@ class Solution {
             return list1;
         }
         ListNode merge = new ListNode();
-        ListNode head = merge;
-        ListNode curr1 = list1;
-        ListNode curr2 = list2;
-        while(curr1 != null && curr2 != null){
-            if(curr1.val <= curr2.val){
-                merge.next = curr1;
-                curr1 = curr1.next;
+        ListNode curr = merge;
+        while(list1 != null && list2 != null){
+            if(list1.val <= list2.val){
+                curr.next = list1;
+                list1 = list1.next;
             }
             else{
-                merge.next = curr2;
-                curr2 = curr2.next;
+                curr.next = list2;
+                list2 = list2.next;
             }
-            merge = merge.next;
+            curr = curr.next;
         }
-        while(curr1 != null){
-            merge.next = curr1;
-            curr1 = curr1.next;
-            merge = merge.next;
+        if(list1 != null){
+            curr.next = list1;
         }
-        while(curr2 != null){
-            merge.next = curr2;
-            curr2 = curr2.next;
-            merge = merge.next;
+        else{
+            curr.next = list2;
         }
-        return head.next;
+        return merge.next;
     }
 }
