@@ -38,7 +38,7 @@ class Solution {
         return dummy.next;
     }
     public ListNode mergeKLists(ListNode[] lists) {
-        if(lists == null || lists.length == 0){
+        if(lists.length == 0){
             return null;
         }
         ListNode head = lists[0];
