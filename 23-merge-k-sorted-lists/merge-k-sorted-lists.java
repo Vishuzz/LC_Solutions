@@ -9,25 +9,42 @@
  * }
  */
 class Solution {
-    public ListNode mergeKLists(ListNode[] lists) {
-        if(lists == null){
-            return null;
+    public ListNode merge2Lists(ListNode list1,ListNode list2){
+        if(list1 == null){
+            return list2;
         }
-        ArrayList<Integer> arr = new ArrayList<>();
-        for(int i=0;i<lists.length;i++){
-            ListNode curr = lists[i];
-            while(curr != null){
-                arr.add(curr.val);
-                curr = curr.next;
+        if(list2 == null){
+            return list1;
+        }
+        ListNode dummy = new ListNode();
+        ListNode curr = dummy;
+        while(list1 != null && list2 != null){
+            if(list1.val <= list2.val){
+                curr.next = list1;
+                list1 = list1.next;
             }
-        }
-        Collections.sort(arr);
-        ListNode result = new ListNode(0);
-        ListNode curr = result;
-        for(int value : arr){
-            curr.next = new ListNode(value);
+            else{
+                curr.next = list2;
+                list2 = list2.next;
+            }
             curr = curr.next;
         }
-        return result.next;
+        if(list1 != null){
+            curr.next = list1;
+        }
+        else{
+            curr.next = list2;
+        }
+        return dummy.next;
+    }
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null || lists.length == 0){
+            return null;
+        }
+        ListNode head = lists[0];
+        for(int i=1;i<lists.length;i++){
+            head = merge2Lists(head,lists[i]);
+        }
+        return head;
     }
 }
